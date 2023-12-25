@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="My PHPMD Rules">
+    <rule name="codesize">
+        <properties>
+            <property name="maximumMethods" value="10"/>
+            <property name="maximumNestingLevel" value="3"/>
+        </properties>
+    </rule>
+    <!-- Ajoutez d'autres règles selon vos besoins -->
+</ruleset>
+
