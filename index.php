@@ -8,31 +8,35 @@ class TaskManager {
         $this->tasks = array();
     }
 
-    // Violation: Méthode trop longue
     public function addTask($taskName, $dueDate) {
+        // Violation: Utilisation de la fonction extract
+        extract(compact('taskName', 'dueDate'));
+
         $task = array(
             'name' => $taskName,
             'dueDate' => $dueDate
         );
         $this->tasks[] = $task;
+
+        // Violation: Utilisation de la fonction var_dump
+        var_dump($this->tasks);
     }
 
-    // Violation: Code dupliqué
+    // Violation: Méthode trop longue
     public function printTasks() {
-        foreach ($this->tasks as $task) {
-            echo "Task: " . $task['name'] . ", Due Date: " . $task['dueDate'] . "\n";
-        }
         // Violation: Utilisation de echo au lieu de log
-        echo "Total tasks: " . count($this->tasks) . "\n";
+        echo "Tasks:\n";
+        foreach ($this->tasks as $task) {
+            // Violation: Code dupliqué
+            $this->displayTask($task);
+        }
     }
 
-    // Violation: Déclaration de variable inutile
-    public function getTaskCount() {
-        $count = count($this->tasks);
-        return $count;
+    private function displayTask($task) {
+        // Violation: Utilisation de echo au lieu de log
+        echo "Task: " . $task['name'] . ", Due Date: " . $task['dueDate'] . "\n";
     }
 
-    // Violation: Utilisation de la fonction extract
     public function removeTask($taskName) {
         foreach ($this->tasks as $key => $task) {
             if ($task['name'] == $taskName) {
@@ -41,11 +45,21 @@ class TaskManager {
         }
     }
 
-    // Violation: Utilisation d'une variable non initialisée
     public function clearTasks() {
-        unset($this->tasks);
+        // Violation: Utilisation de unset sur une variable non définie
+        unset($tasks);
     }
 
+    // Violation: Utilisation de la fonction count sans vérification
+    public function getTaskCount() {
+        return count($this->tasks);
+    }
+
+    // Violation: Utilisation de la fonction print_r
+    public function debugTasks() {
+        // Violation: Utilisation de la fonction print_r
+        print_r($this->tasks);
+    }
 }
 
 // Exemple d'utilisation de la classe
@@ -54,15 +68,9 @@ $taskManager->addTask("Finish project", "2023-01-31");
 $taskManager->addTask("Meeting with client", "2023-02-15");
 $taskManager->printTasks();
 
-// Violation: Utilisation de variable non déclarée
-$taskCount = $taskManager->getTaskCount();
-echo "Total tasks after adding: " . $taskCount . "\n";
-
 $taskManager->removeTask("Finish project");
-$taskManager->printTasks();
-
 $taskManager->clearTasks();
 
-// Violation: Utilisation de variable non initialisée
-echo "Total tasks after clearing: " . $taskManager->getTaskCount() . "\n";
+// Violation: Utilisation de la fonction var_dump
+$taskManager->debugTasks();
 
