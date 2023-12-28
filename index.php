@@ -6,6 +6,7 @@ class TaskManager {
 
     function __construct() {
         $this->tasks = array();
+        
     }
 
     public function addTask($taskName, $dueDate) {
