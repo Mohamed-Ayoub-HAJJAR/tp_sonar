@@ -16,8 +16,20 @@ jobs:
         with:
           fetch-depth: 0 # Historique complet pour Git Blame / SonarCloud
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: dom, mbstring, xml, xmlwriter, json
+          coverage: pcov
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Run PHPUnit tests and generate reports
+        run: ./vendor/bin/phpunit
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
