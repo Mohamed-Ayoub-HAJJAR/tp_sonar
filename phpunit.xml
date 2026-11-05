@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="My PHPMD Rules">
-    <rule name="codesize">
-        <properties>
-            <property name="maximumMethods" value="10"/>
-            <property name="maximumNestingLevel" value="3"/>
-        </properties>
-    </rule>
-    <!-- Ajoutez d'autres règles selon vos besoins -->
-</ruleset>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache">
 
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+            <file>index.php</file>
+        </include>
+    </source>
+
+    <logging>
+        <!-- Génère reports/log.xml (Format JUnit) -->
+        <junit outputFile="reports/log.xml"/>
+    </logging>
+
+    <coverage>
+        <report>
+            <!-- Génère reports/coverage.xml (Format Clover) -->
+            <clover outputFile="reports/coverage.xml"/>
+        </report>
+    </coverage>
+</phpunit>
