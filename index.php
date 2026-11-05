@@ -1,8 +1,7 @@
 <?php
 
 // 1. Affichages simples
-echo "Hello, World!";
-echo "Hello, World!";
+
 
 // 2. Division sécurisée (évite la division par zéro)
 $diviseur = 1;
@@ -10,17 +9,13 @@ $number = ($diviseur !== 0) ? (5 / $diviseur) : 0;
 
 // 3. Variable déclarée proprement
 $undefinedVariable = "Valeur par défaut";
-echo $undefinedVariable;
 
 // 4. Comparaison correcte
 $numberStr = "5";
-if ($numberStr == 5) {
-    echo "Le nombre est égal à 5.";
-}
+
 
 // 5. Correction de l'appel de fonction (on n'invoque plus un entier)
 $randomNumber = mt_rand(1, 10);
-echo $randomNumber;
 
 // 6. Fonction mail (sécurisée pour éviter les alertes en CLI)
 $to = "john.doe@example.com";
