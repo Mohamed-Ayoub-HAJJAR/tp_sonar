@@ -1,76 +1,47 @@
 <?php
 
-class TaskManager {
-    
-    private $tasks;
+// Bug 1: Erreur de syntaxe, une parenthèse manquante
+echo "Hello, World!"
+echo "Hello, World!"
 
-    function __construct() {
-        $this->tasks = array();
-    }
+// Bug 2: Division par zéro
+$number = 5 / 0;
 
-    public function addTask($taskName, $dueDate) {
-        // Violation: Utilisation de la fonction extract
-        extract(compact('taskName', 'dueDate'));
+// Bug 3: Variable non déclarée
+echo $undefinedVariable;
 
-        $task = array(
-            'name' => $taskName,
-            'dueDate' => $dueDate
-        );
-        $this->tasks[] = $task;
-
-        // Violation: Utilisation de la fonction var_dump
-        var_dump($this->tasks);
-    }
-
-    // Violation: Méthode trop longue
-    public function printTasks() {
-        // Violation: Utilisation de echo au lieu de log
-        echo "Tasks:\n";
-        foreach ($this->tasks as $task) {
-            // Violation: Code dupliqué
-            $this->displayTask($task);
-        }
-    }
-
-    private function displayTask($task) {
-        // Violation: Utilisation de echo au lieu de log
-        echo "Task: " . $task['name'] . ", Due Date: " . $task['dueDate'] . "\n";
-    }
-
-    public function removeTask($taskName) {
-        foreach ($this->tasks as $key => $task) {
-            if ($task['name'] == $taskName) {
-                unset($this->tasks[$key]);
-            }
-        }
-    }
-
-    public function clearTasks() {
-        // Violation: Utilisation de unset sur une variable non définie
-        unset($tasks);
-    }
-
-    // Violation: Utilisation de la fonction count sans vérification
-    public function getTaskCount() {
-        return count($this->tasks);
-    }
-
-    // Violation: Utilisation de la fonction print_r
-    public function debugTasks() {
-        // Violation: Utilisation de la fonction print_r
-        print_r($this->tasks);
-    }
+// Bug 4: Comparaison incorrecte
+$number = "5";
+if ($number == 5) {
+    echo "Le nombre est égal à 5.";
 }
 
-// Exemple d'utilisation de la classe
-$taskManager = new TaskManager();
-$taskManager->addTask("Finish project", "2023-01-31");
-$taskManager->addTask("Meeting with client", "2023-02-15");
-$taskManager->printTasks();
+// Bug 5: Utilisation incorrecte de la fonction
+$randomNumber = mt_rand();
+echo $randomNumber(5);
 
-$taskManager->removeTask("Finish project");
-$taskManager->clearTasks();
+// Bug 6: Utilisation incorrecte de la fonction mail
+$to = "john.doe@example.com";
+$subject = "Test";
+$message = "Ceci est un test.";
+$headers = "From: webmaster@example.com";
+mail($to, $subject, $message, $headers);
 
-// Violation: Utilisation de la fonction var_dump
-$taskManager->debugTasks();
+// Bug 7: Utilisation de MD5 pour le hachage des mots de passe
+$password = "securepassword";
+$hashedPassword = md5($password);
 
+// Bug 8: Suppression incorrecte de fichiers
+$filename = "/path/to/file.txt";
+unlink($filename);
+
+// Bug 9: Utilisation de la fonction eval
+$userInput = $_GET['input'];
+eval($userInput);
+
+// Bug 10: Injection SQL
+$username = $_POST['username'];
+$password = $_POST['password'];
+$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+
+?>
