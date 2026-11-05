@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         colors="true"
-         cacheDirectory=".phpunit.cache">
+         colors="true">
 
     <testsuites>
         <testsuite name="Application Test Suite">
@@ -11,22 +10,19 @@
         </testsuite>
     </testsuites>
 
-    <source>
+    <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">src</directory>
             <file>index.php</file>
         </include>
-    </source>
-
-    <logging>
-        <!-- Génère reports/log.xml (Format JUnit) -->
-        <junit outputFile="reports/log.xml"/>
-    </logging>
-
-    <coverage>
         <report>
-            <!-- Génère reports/coverage.xml (Format Clover) -->
+            <!-- Génère reports/coverage.xml pour SonarCloud -->
             <clover outputFile="reports/coverage.xml"/>
         </report>
     </coverage>
+
+    <logging>
+        <!-- Génère reports/log.xml pour SonarCloud -->
+        <junit outputFile="reports/log.xml"/>
+    </logging>
 </phpunit>

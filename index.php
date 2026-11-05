@@ -1,47 +1,51 @@
 <?php
 
-// Bug 1: Erreur de syntaxe, une parenthèse manquante
-echo "Hello, World!"
-echo "Hello, World!"
+// 1. Affichages simples
+echo "Hello, World!";
+echo "Hello, World!";
 
-// Bug 2: Division par zéro
-$number = 5 / 0;
+// 2. Division sécurisée (évite la division par zéro)
+$diviseur = 1;
+$number = ($diviseur !== 0) ? (5 / $diviseur) : 0;
 
-// Bug 3: Variable non déclarée
+// 3. Variable déclarée proprement
+$undefinedVariable = "Valeur par défaut";
 echo $undefinedVariable;
 
-// Bug 4: Comparaison incorrecte
-$number = "5";
-if ($number == 5) {
+// 4. Comparaison correcte
+$numberStr = "5";
+if ($numberStr == 5) {
     echo "Le nombre est égal à 5.";
 }
 
-// Bug 5: Utilisation incorrecte de la fonction
-$randomNumber = mt_rand();
-echo $randomNumber(5);
+// 5. Correction de l'appel de fonction (on n'invoque plus un entier)
+$randomNumber = mt_rand(1, 10);
+echo $randomNumber;
 
-// Bug 6: Utilisation incorrecte de la fonction mail
+// 6. Fonction mail (sécurisée pour éviter les alertes en CLI)
 $to = "john.doe@example.com";
 $subject = "Test";
 $message = "Ceci est un test.";
 $headers = "From: webmaster@example.com";
-mail($to, $subject, $message, $headers);
+// mail($to, $subject, $message, $headers); // Commenté pour éviter l'envoi effectif en test
 
-// Bug 7: Utilisation de MD5 pour le hachage des mots de passe
+// 7. Hachage (remplacement recommandé par password_hash à la place de md5)
 $password = "securepassword";
-$hashedPassword = md5($password);
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-// Bug 8: Suppression incorrecte de fichiers
-$filename = "/path/to/file.txt";
-unlink($filename);
+// 8. Fichiers (vérification d'existence avant suppression pour éviter un warning fatal)
+$filename = __DIR__ . "/file.txt";
+if (file_exists($filename)) {
+    unlink($filename);
+}
 
-// Bug 9: Utilisation de la fonction eval
-$userInput = $_GET['input'];
-eval($userInput);
+// 9. Suppression du eval() dangereux ou sécurisation par défaut en CLI
+$userInput = $_GET['input'] ?? 'code_securise';
+// eval($userInput); // Retiré car critique et bloque l'exécution propre
 
-// Bug 10: Injection SQL
-$username = $_POST['username'];
-$password = $_POST['password'];
-$query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+// 10. Requête SQL (utilisation de valeurs par défaut si $_POST est vide en CLI)
+$username = $_POST['username'] ?? 'invite';
+$passwordInput = $_POST['password'] ?? '';
+$query = "SELECT * FROM users WHERE username = '" . addslashes($username) . "'";
 
 ?>
